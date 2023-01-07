@@ -16,7 +16,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
     }
-
+    // listening for keydown event with enter key, if enter is pressed, evaluate answer
+    document.getElementById('answer-box').addEventListener('keydown', function(event) {
+        if (event.key === "Enter") {
+            checkAnswer();
+        }
+    })
     runGame("addition");
 })
 
@@ -27,6 +32,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // pass gameType into func as argument
 function runGame(gameType) {
+// set answer box to empty string so answer is deleted after submission
+document.getElementById('answer-box').value = '';
+// .focus() means each time game func is called the answer box gains focus so no need to click to type
+document.getElementById('answer-box').focus();
+
     // create 2 random numbers between 1-25
 let num1 = Math.floor(Math.random() * 25) + 1;
 let num2 = Math.floor(Math.random() * 25) + 1;
@@ -125,8 +135,8 @@ function displayAdditionQuestion(operand1, operand2) {
 }
 
 function displaySubtractQuestion(operand1, operand2) {
-    document.getElementById('operand1').textContent = operand1;
-    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operand1').textContent = operand1 > operand2 ? operand1 : operand2;
+    document.getElementById('operand2').textContent = operand1 > operand2 ? operand2 : operand1;
     document.getElementById('operator').textContent = "-";
 }
 
@@ -137,7 +147,7 @@ function displayMultiplyQuestion(operand1, operand2) {
 }
 
 function displayDivideQuestion(operand1, operand2) {
-    document.getElementById('operand1').textContent = operand1;
-    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operand1').textContent = operand1 > operand2 ? operand1 : operand2;
+    document.getElementById('operand2').textContent = operand1 > operand2 ? operand2 : operand1;
     document.getElementById('operator').textContent = "/";
 }
